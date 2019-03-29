@@ -86,7 +86,7 @@ classdef ClothoidCurve < CurveBase
     end
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     function [ X, Y, S, DST ] = closestPoint( self, qx, qy )
-      [ X, Y, S, DST ] = ...
+      [ X, Y, S, ~, ~, DST ] = ...
         ClothoidCurveMexWrapper( 'closestPoint', ...
                                  self.objectHandle, qx, qy );
     end
@@ -140,11 +140,9 @@ classdef ClothoidCurve < CurveBase
       x0     = self.xBegin();
       y0     = self.yBegin();
       theta0 = self.thetaBegin();
-      k      = self.kappaBegin();
-      dk     = self.kappa_D();
-      x0 = self.xBegin();
-      [ x0, y0, theta0, k0, dk, L ] = ...
-        ClothoidCurveMexWrapper( 'getPars', self.objectHandle );
+      k0     = self.kappaBegin();
+      dk     = self.kappa_D(0);
+      L      = self.length();
     end
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     function [P1,P2,P3] = bbTriangles( self, varargin )
